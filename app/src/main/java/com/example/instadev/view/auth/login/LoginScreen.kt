@@ -30,14 +30,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instadev.R
 
 @Preview
 @Composable
-fun LoginScreen() {
-
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun LoginScreen(
+    viewModel: LoginViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold { paddingValues ->
         Column(
@@ -66,10 +68,10 @@ fun LoginScreen() {
                 modifier = Modifier
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(30),
-                value = email,
+                value = uiState.email,
                 label = { Text("Usuario, correo electrónico o móvil")},
                 onValueChange = {
-                    email = it
+                    viewModel.onEmailChange(it)
                 }
             )
             Spacer(Modifier.height(12.dp))
@@ -77,10 +79,10 @@ fun LoginScreen() {
                 modifier = Modifier
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(30),
-                value = password,
+                value = uiState.password,
                 label = { Text("Contraseña")},
                 onValueChange = {
-                    password = it
+                    viewModel.onPasswordChange(it)
                 }
             )
             Spacer(Modifier.height(12.dp))
@@ -89,7 +91,8 @@ fun LoginScreen() {
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Blue
                 ),
-                onClick = {}
+                onClick = {},
+                enabled = uiState.isLoginEnabled
             ) {
                 Text(
                     modifier = Modifier.padding(vertical = 4.dp),
