@@ -1,5 +1,6 @@
 package com.example.instadev.view.auth.login
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -44,7 +46,7 @@ fun LoginScreen(
     Scaffold { paddingValues ->
         Column(
             modifier = Modifier
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(paddingValues)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize(),
@@ -54,7 +56,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .padding(top = 24.dp),
                 text = "Español (España)",
-                color = Color.Gray
+                color = MaterialTheme.colorScheme.onBackground
             )
             Spacer(Modifier.weight(1f))
             Image(
@@ -69,7 +71,12 @@ fun LoginScreen(
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(30),
                 value = uiState.email,
-                label = { Text("Usuario, correo electrónico o móvil")},
+                label = {
+                    Text(
+                        text = "Usuario, correo electrónico o móvil",
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                },
                 onValueChange = {
                     viewModel.onEmailChange(it)
                 }
@@ -80,7 +87,12 @@ fun LoginScreen(
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(30),
                 value = uiState.password,
-                label = { Text("Contraseña")},
+                label = {
+                    Text(
+                        text = "Contraseña",
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                },
                 onValueChange = {
                     viewModel.onPasswordChange(it)
                 }
@@ -89,7 +101,7 @@ fun LoginScreen(
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Blue
+                    containerColor = MaterialTheme.colorScheme.primary
                 ),
                 onClick = {},
                 enabled = uiState.isLoginEnabled
@@ -97,22 +109,28 @@ fun LoginScreen(
                 Text(
                     modifier = Modifier.padding(vertical = 4.dp),
                     text = "Iniciar sesión",
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
             TextButton(onClick = {}) {
                 Text(
-                    text = "Has olvidado la contraseña?"
+                    text = "¿Has olvidado la contraseña?",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Spacer(Modifier.weight(1f))
             OutlinedButton (
                 modifier = Modifier.fillMaxWidth(),
-                onClick = {}
+                onClick = {},
+                border = BorderStroke(
+                    1.dp,
+                    MaterialTheme.colorScheme.primary
+                )
             ) {
                 Text(
                     modifier = Modifier.padding(vertical = 4.dp),
-                    text = "Crear nueva cuenta"
+                    text = "Crear nueva cuenta",
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
             Icon(
@@ -121,7 +139,7 @@ fun LoginScreen(
                     .padding(vertical = 24.dp),
                 painter = painterResource(R.drawable.ic_meta),
                 contentDescription = "Meta logo footer",
-                tint = Color.Gray
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
     }
