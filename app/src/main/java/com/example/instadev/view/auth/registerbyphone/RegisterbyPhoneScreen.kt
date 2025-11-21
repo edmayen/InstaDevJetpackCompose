@@ -1,4 +1,4 @@
-package com.example.instadev.view.auth.register
+package com.example.instadev.view.auth.registerbyphone
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,8 +30,8 @@ import com.example.instadev.view.core.components.InstaText
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun RegisterScreen(
-    viewModel: RegisterViewModel = viewModel()
+fun RegisterByPhoneScreen(
+    viewModel: RegisterByPhoneViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

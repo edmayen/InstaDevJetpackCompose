@@ -4,15 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.instadev.view.auth.login.LoginScreen
-import com.example.instadev.view.auth.register.RegisterScreen
+import com.example.instadev.view.auth.registerbyphone.RegisterByPhoneScreen
 
 @Composable
 fun NavigationWrapper() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Login) {
         composable<Login> {
-            RegisterScreen()
+            RegisterByPhoneScreen()
         }
     }
 }

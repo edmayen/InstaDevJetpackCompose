@@ -1,4 +1,4 @@
-package com.example.instadev.view.auth.register
+package com.example.instadev.view.auth.registerbyphone
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class RegisterViewModel: ViewModel() {
-    private val _uiState = MutableStateFlow(RegisterUiState())
-    val uiState: StateFlow<RegisterUiState> = _uiState.asStateFlow()
+class RegisterByPhoneViewModel: ViewModel() {
+    private val _uiState = MutableStateFlow(RegisterByPhoneUiState())
+    val uiState: StateFlow<RegisterByPhoneUiState> = _uiState.asStateFlow()
 
     fun onPhoneNumberChange(phoneNumber: String) {
         _uiState.update {
