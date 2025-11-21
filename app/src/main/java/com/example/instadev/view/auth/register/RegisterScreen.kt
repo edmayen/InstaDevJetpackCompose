@@ -1,10 +1,8 @@
 package com.example.instadev.view.auth.register
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
@@ -16,11 +14,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instadev.R
 import com.example.instadev.view.core.components.InstaButton
 import com.example.instadev.view.core.components.InstaOutlinedButton
@@ -30,7 +30,11 @@ import com.example.instadev.view.core.components.InstaText
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun RegisterScreen() {
+fun RegisterScreen(
+    viewModel: RegisterViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -40,7 +44,10 @@ fun RegisterScreen() {
                 ),
                 navigationIcon = {
                     IconButton(onClick = { }) {
-                        Icon(imageVector = Icons.Filled.ArrowBackIosNew, contentDescription = "Back")
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBackIosNew,
+                            contentDescription = "Back"
+                        )
                     }
                 }
             )
@@ -65,9 +72,9 @@ fun RegisterScreen() {
                 InstaOutlinedTextField(
                     modifier = Modifier.padding(top = 12.dp),
                     textHint = stringResource(R.string.register_screen_textfield_register_phone),
-                    value = "",
-                    onValueChange = {
-                        ""
+                    value = uiState.phoneNumber,
+                    onValueChange = { phoneNumber ->
+                        viewModel.onPhoneNumberChange(phoneNumber)
                     }
                 )
                 InstaText(
@@ -80,10 +87,10 @@ fun RegisterScreen() {
                         .fillMaxWidth()
                         .padding(top = 16.dp),
                     text = stringResource(R.string.register_screen_button_next),
-                    enabled = true,
+                    enabled = uiState.isPhoneNumberValid,
                     onClick = {}
                 )
-                InstaOutlinedButton (
+                InstaOutlinedButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp),
