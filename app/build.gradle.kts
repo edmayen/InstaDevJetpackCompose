@@ -61,4 +61,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
-}
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.material.icons.extended)}

@@ -32,6 +32,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instadev.R
 import com.example.instadev.view.core.components.InstaButton
+import com.example.instadev.view.core.components.InstaOutlinedButton
+import com.example.instadev.view.core.components.InstaOutlinedTextField
 import com.example.instadev.view.core.components.InstaText
 
 @Preview
@@ -64,33 +66,19 @@ fun LoginScreen(
                 contentDescription = "InstaDev logo header"
             )
             Spacer(Modifier.weight(1.3f))
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                shape = RoundedCornerShape(30),
+            InstaOutlinedTextField(
+                modifier = Modifier,
+                textHint = stringResource(R.string.login_screen_textfield_email),
                 value = uiState.email,
-                label = {
-                    InstaText(
-                        text = stringResource(R.string.login_screen_textfield_email),
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                },
                 onValueChange = {
                     viewModel.onEmailChange(it)
                 }
             )
             Spacer(Modifier.height(12.dp))
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                shape = RoundedCornerShape(30),
+            InstaOutlinedTextField(
+                modifier = Modifier,
+                textHint = stringResource(R.string.login_screen_textfield_password),
                 value = uiState.password,
-                label = {
-                    InstaText(
-                        text = stringResource(R.string.login_screen_textfield_password),
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                },
                 onValueChange = {
                     viewModel.onPasswordChange(it)
                 }
@@ -109,20 +97,11 @@ fun LoginScreen(
                 )
             }
             Spacer(Modifier.weight(1f))
-            OutlinedButton (
+            InstaOutlinedButton (
                 modifier = Modifier.fillMaxWidth(),
-                onClick = {},
-                border = BorderStroke(
-                    1.dp,
-                    MaterialTheme.colorScheme.primary
-                )
-            ) {
-                InstaText(
-                    modifier = Modifier.padding(vertical = 4.dp),
-                    text = stringResource(R.string.login_screen_button_register),
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
+                text = stringResource(R.string.login_screen_button_register),
+                onClick = {}
+            )
             Icon(
                 modifier = Modifier
                     .width(60.dp)
