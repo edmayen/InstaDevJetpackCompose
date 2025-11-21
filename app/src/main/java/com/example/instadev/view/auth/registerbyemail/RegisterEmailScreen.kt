@@ -14,10 +14,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instadev.R
 import com.example.instadev.view.core.components.InstaButton
 import com.example.instadev.view.core.components.InstaOutlinedButton
@@ -27,7 +30,10 @@ import com.example.instadev.view.core.components.InstaText
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun RegisterEmailScreen() {
+fun RegisterEmailScreen(
+    viewModel: RegisterEmailViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
       topBar = {
@@ -66,9 +72,9 @@ fun RegisterEmailScreen() {
                 InstaOutlinedTextField(
                     modifier = Modifier.padding(top = 12.dp),
                     textHint = stringResource(R.string.register_screen_textfield_register_email),
-                    value = "",
+                    value = uiState.email,
                     onValueChange = { email ->
-
+                        viewModel.onEmailChange(email)
                     }
                 )
                 InstaText(
@@ -81,7 +87,7 @@ fun RegisterEmailScreen() {
                         .fillMaxWidth()
                         .padding(top = 16.dp),
                     text = stringResource(R.string.register_screen_button_next),
-                    enabled = false,
+                    enabled = uiState.isEmailValid,
                     onClick = {}
                 )
                 InstaOutlinedButton(
