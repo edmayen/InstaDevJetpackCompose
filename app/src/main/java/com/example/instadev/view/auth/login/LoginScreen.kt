@@ -39,7 +39,8 @@ import com.example.instadev.view.core.components.InstaText
 @Preview
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel = viewModel()
+    viewModel: LoginViewModel = viewModel(),
+    navigateToRegisterByPhone: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -100,7 +101,7 @@ fun LoginScreen(
             InstaOutlinedButton (
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.login_screen_button_register),
-                onClick = {}
+                onClick = { navigateToRegisterByPhone() }
             )
             Icon(
                 modifier = Modifier

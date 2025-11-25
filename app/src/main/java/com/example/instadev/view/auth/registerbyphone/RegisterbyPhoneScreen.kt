@@ -33,7 +33,9 @@ import com.example.instadev.view.core.components.InstaText
 @Preview
 @Composable
 fun RegisterByPhoneScreen(
-    viewModel: RegisterByPhoneViewModel = viewModel()
+    viewModel: RegisterByPhoneViewModel = viewModel(),
+    navigateToRegisterByEmail: () -> Unit = {},
+    navigateBack: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -45,7 +47,9 @@ fun RegisterByPhoneScreen(
                     containerColor = MaterialTheme.colorScheme.background
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                        navigateBack()
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Back",
@@ -99,7 +103,9 @@ fun RegisterByPhoneScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = stringResource(R.string.register_screen_button_register_with_email),
-                    onClick = {}
+                    onClick = {
+                        navigateToRegisterByEmail()
+                    }
                 )
             }
         }

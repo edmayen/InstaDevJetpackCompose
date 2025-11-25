@@ -33,7 +33,8 @@ import com.example.instadev.view.core.components.InstaText
 @Preview
 @Composable
 fun RegisterEmailScreen(
-    viewModel: RegisterEmailViewModel = viewModel()
+    viewModel: RegisterEmailViewModel = viewModel(),
+    navigateBack: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -45,7 +46,9 @@ fun RegisterEmailScreen(
                   containerColor = MaterialTheme.colorScheme.background
               ),
               navigationIcon = {
-                  IconButton(onClick = { }) {
+                  IconButton(onClick = {
+                      navigateBack()
+                  }) {
                       Icon(
                           imageVector = Icons.Filled.ArrowBack,
                           contentDescription = "Back",
@@ -92,14 +95,18 @@ fun RegisterEmailScreen(
                         .fillMaxWidth(),
                     text = stringResource(R.string.register_screen_button_next),
                     enabled = uiState.isEmailValid,
-                    onClick = {}
+                    onClick = {
+
+                    }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 InstaOutlinedButton(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = stringResource(R.string.register_screen_button_register_with_phone),
-                    onClick = {}
+                    onClick = {
+                        navigateBack()
+                    }
                 )
             }
         }
