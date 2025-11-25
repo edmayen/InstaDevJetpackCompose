@@ -1,11 +1,13 @@
 package com.example.instadev.view.auth.registerbyphone
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -45,8 +47,9 @@ fun RegisterByPhoneScreen(
                 navigationIcon = {
                     IconButton(onClick = { }) {
                         Icon(
-                            imageVector = Icons.Filled.ArrowBackIosNew,
-                            contentDescription = "Back"
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Back",
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
@@ -60,40 +63,41 @@ fun RegisterByPhoneScreen(
                     .padding(horizontal = 16.dp)
             ) {
                 InstaText(
-                    modifier = Modifier.padding(top = 8.dp),
                     text = stringResource(R.string.register_screen_title_phone),
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                Spacer(modifier = Modifier.height(10.dp))
                 InstaText(
-                    modifier = Modifier.padding(top = 10.dp),
                     text = stringResource(R.string.register_screen_subtitle_phone),
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                Spacer(modifier = Modifier.height(12.dp))
                 InstaOutlinedTextField(
-                    modifier = Modifier.padding(top = 12.dp),
                     textHint = stringResource(R.string.register_screen_textfield_register_phone),
                     value = uiState.phoneNumber,
                     onValueChange = { phoneNumber ->
                         viewModel.onPhoneNumberChange(phoneNumber)
                     }
                 )
+                Spacer(modifier = Modifier.height(10.dp))
                 InstaText(
-                    modifier = Modifier.padding(top = 10.dp),
                     text = stringResource(R.string.register_screen_body),
                     style = MaterialTheme.typography.bodySmall
                 )
+                Spacer(modifier = Modifier.height(16.dp))
                 InstaButton(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .fillMaxWidth(),
                     text = stringResource(R.string.register_screen_button_next),
                     enabled = uiState.isPhoneNumberValid,
                     onClick = {}
                 )
+                Spacer(modifier = Modifier.height(16.dp))
                 InstaOutlinedButton(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .fillMaxWidth(),
                     text = stringResource(R.string.register_screen_button_register_with_email),
                     onClick = {}
                 )
