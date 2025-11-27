@@ -1,8 +1,9 @@
 package com.example.instadev.domain.usecases
 
 import com.example.instadev.domain.repository.AuthRepository
+import javax.inject.Inject
 
-class LoginUseCase(
+class LoginUseCase @Inject constructor (
     private val authRepository: AuthRepository
 ) {
 

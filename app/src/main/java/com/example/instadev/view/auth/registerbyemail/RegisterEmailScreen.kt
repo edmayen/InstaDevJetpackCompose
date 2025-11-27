@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instadev.R
@@ -33,7 +34,7 @@ import com.example.instadev.view.core.components.InstaText
 @Preview
 @Composable
 fun RegisterEmailScreen(
-    viewModel: RegisterEmailViewModel = viewModel(),
+    viewModel: RegisterEmailViewModel = hiltViewModel(),
     navigateBack: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
