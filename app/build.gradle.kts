@@ -71,4 +71,8 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.adapter)
+
 }
