@@ -8,6 +8,7 @@ data class UserModel(
     val nickName: String,
     val followers: Int,
     val following: List<String>,
-    val userType: UserModeCatalog
+    val userType: UserModeCatalog,
+    val verified: Boolean
 )
 

@@ -5,8 +5,8 @@ import javax.inject.Inject
 
 interface AuthRepository {
 
-    fun doLogin(
+    suspend fun doLogin(
         user: String,
         password: String
-    ): UserModel
+    ): List<UserModel>
 }

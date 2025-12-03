@@ -1,13 +1,16 @@
 package com.example.instadev.view.auth.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instadev.domain.usecases.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,10 +37,17 @@ class LoginViewModel @Inject constructor(
 
     fun onClickSelected() {
         viewModelScope.launch {
-            loginUseCase.invoke(
+            val response = loginUseCase.invoke(
                 _uiState.value.email,
                 _uiState.value.password
             )
+            withContext(Dispatchers.Main) {
+                if (response != null) {
+                    Log.i("LOGIN", "SUCCESS: ${response.name}")
+                } else {
+                    Log.e("ERROR", "ERROR")
+                }
+            }
         }
     }
 
