@@ -2,6 +2,7 @@ package com.example.instadev.view.auth.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -39,74 +41,84 @@ fun LoginScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold { paddingValues ->
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.background)
-                .padding(paddingValues)
-                .padding(horizontal = 24.dp)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            InstaText(
+        if (uiState.isLoading) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        } else {
+            Column(
                 modifier = Modifier
-                    .padding(top = 24.dp),
-                text = stringResource(R.string.login_screen_header_text_spain),
-                color = MaterialTheme.colorScheme.onBackground
-            )
-            Spacer(Modifier.weight(1f))
-            Image(
-                modifier = Modifier
-                    .size(56.dp),
-                painter = painterResource(R.drawable.instadev_logo),
-                contentDescription = "InstaDev logo header"
-            )
-            Spacer(Modifier.weight(1.3f))
-            InstaOutlinedTextField(
-                modifier = Modifier,
-                textHint = stringResource(R.string.login_screen_textfield_email),
-                value = uiState.email,
-                onValueChange = {
-                    viewModel.onEmailChange(it)
-                }
-            )
-            Spacer(Modifier.height(12.dp))
-            InstaOutlinedTextField(
-                modifier = Modifier,
-                textHint = stringResource(R.string.login_screen_textfield_password),
-                value = uiState.password,
-                onValueChange = {
-                    viewModel.onPasswordChange(it)
-                }
-            )
-            Spacer(Modifier.height(12.dp))
-            InstaButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(R.string.login_screen_button_login),
-                enabled = uiState.isLoginEnabled,
-                onClick = {
-                    viewModel.onClickSelected()
-                }
-            )
-            TextButton(onClick = {}) {
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(paddingValues)
+                    .padding(horizontal = 24.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 InstaText(
-                    text = stringResource(R.string.login_screen_text_forgot_password),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    modifier = Modifier
+                        .padding(top = 24.dp),
+                    text = stringResource(R.string.login_screen_header_text_spain),
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                Spacer(Modifier.weight(1f))
+                Image(
+                    modifier = Modifier
+                        .size(56.dp),
+                    painter = painterResource(R.drawable.instadev_logo),
+                    contentDescription = "InstaDev logo header"
+                )
+                Spacer(Modifier.weight(1.3f))
+                InstaOutlinedTextField(
+                    modifier = Modifier,
+                    textHint = stringResource(R.string.login_screen_textfield_email),
+                    value = uiState.email,
+                    onValueChange = {
+                        viewModel.onEmailChange(it)
+                    }
+                )
+                Spacer(Modifier.height(12.dp))
+                InstaOutlinedTextField(
+                    modifier = Modifier,
+                    textHint = stringResource(R.string.login_screen_textfield_password),
+                    value = uiState.password,
+                    onValueChange = {
+                        viewModel.onPasswordChange(it)
+                    }
+                )
+                Spacer(Modifier.height(12.dp))
+                InstaButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = stringResource(R.string.login_screen_button_login),
+                    enabled = uiState.isLoginEnabled,
+                    onClick = {
+                        viewModel.onClickSelected()
+                    }
+                )
+                TextButton(onClick = {}) {
+                    InstaText(
+                        text = stringResource(R.string.login_screen_text_forgot_password),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Spacer(Modifier.weight(1f))
+                InstaOutlinedButton (
+                    modifier = Modifier.fillMaxWidth(),
+                    text = stringResource(R.string.login_screen_button_register),
+                    onClick = { navigateToRegisterByPhone() }
+                )
+                Icon(
+                    modifier = Modifier
+                        .width(60.dp)
+                        .padding(vertical = 24.dp),
+                    painter = painterResource(R.drawable.ic_meta),
+                    contentDescription = "Meta logo footer",
+                    tint = MaterialTheme.colorScheme.onBackground
                 )
             }
-            Spacer(Modifier.weight(1f))
-            InstaOutlinedButton (
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(R.string.login_screen_button_register),
-                onClick = { navigateToRegisterByPhone() }
-            )
-            Icon(
-                modifier = Modifier
-                    .width(60.dp)
-                    .padding(vertical = 24.dp),
-                painter = painterResource(R.drawable.ic_meta),
-                contentDescription = "Meta logo footer",
-                tint = MaterialTheme.colorScheme.onBackground
-            )
         }
+
     }
 }

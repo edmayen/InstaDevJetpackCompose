@@ -37,6 +37,9 @@ class LoginViewModel @Inject constructor(
 
     fun onClickSelected() {
         viewModelScope.launch {
+            _uiState.update { state ->
+                state.copy(isLoading = true)
+            }
             val response = loginUseCase.invoke(
                 _uiState.value.email,
                 _uiState.value.password
@@ -44,8 +47,14 @@ class LoginViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 if (response != null) {
                     Log.i("LOGIN", "SUCCESS: ${response.name}")
+                    _uiState.update { state ->
+                        state.copy(isLoading = false)
+                    }
                 } else {
                     Log.e("ERROR", "ERROR")
+                    _uiState.update { state ->
+                        state.copy(isLoading = false)
+                    }
                 }
             }
         }
